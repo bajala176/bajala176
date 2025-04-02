@@ -1,0 +1,337 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: initial sans-serif ;
+	font-size: 18px;
+	font-weight: bold;
+}
+header{
+		padding: 20px 20px;
+      text-align: center;
+      position: relative;
+	background: linear-gradient(to right, #1e5f74, transparent);
+	
+}
+body{
+	height: 100%;
+	width: 100%;
+	background-image: url('bghome.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	position: absolute;
+} 
+
+ h1{
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 0;
+	margin-right: 50px;
+	margin-left: 50px;
+	font-size: 50px;
+	color:lightyellow;
+}
+ h2{
+	text-align: left;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 50px;
+	margin-left: 75px;
+	font-size: 20px;
+	color: lightyellow;
+
+}
+.button_LRSA{
+	text-align: left;
+	margin-top: -40px;
+	margin-bottom: 0;
+	margin-right: 10px;
+	margin-left: 55%;
+	font-size: 40px;
+	position: relative;
+	border-radius: 30px;
+	color: ;
+}
+.btn_log-reg1{
+	
+	width: 15%;
+	padding: 5px 10px;
+	cursor: pointer;
+	margin-top: 0;
+	margin-left: 0;
+	background: linear-gradient(to right, darkcyan, cyan);
+	border: 1px solid cyan;
+	border-radius: 30px;
+	color: black;
+	font-size: 14px;
+}
+.btn_start{
+	width: 55%;
+	height: 60px;
+	padding: 10px 10px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-left: 100px;
+	background: linear-gradient(to right, darkcyan, cyan);
+	border: 1px solid cyan;
+	border-radius: 15px;
+	color: lightyellow;
+	font-size: 24px;
+}
+.text_1{
+	width: 50%;
+	height: 550px;
+	margin-top: 60px;
+	margin-bottom: 0;
+	margin-right: 50px;
+	margin-left: 75px;
+	position: absolute;
+	background: linear-gradient(to right, white, transparent);
+border: 2px solid white;
+border-radius: 30px;
+
+	
+}
+ /* Footer */
+ footer {
+	background-color: #1e5f74;
+	color: #fff;
+	text-align: center;
+	padding: 5px 10px;
+	margin-top: 41%;
+	font-weight: normal;
+	position: relative;
+  }
+
+  .footer{
+text-align: center;
+font-size: 18px;
+  }
+p {
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: 0;
+	margin-right: 50px;
+	margin-left: 12px;
+	
+}
+ul{
+	margin-top: black
+	margin-bottom: 0;
+	margin-right: 50px;
+	margin-left: 30px;
+
+}
+li {
+	margin-top:  10px; 
+	font-size: 22px;
+	font-family: initial sans-serif ;
+	font-weight: normal;
+}
+.text_2{
+	width: 50%;
+	height: 200px;
+	margin-bottom: 0;
+	margin-left: 1100px;
+	background: linear-gradient(to right, white, transparent);
+	border: 2px solid white;
+	border-radius: 50px;
+}
+
+h3{
+	margin-top: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	text-align: center;
+	font-size: 30px;
+}
+.title{
+	font-size: 24;
+	margin-top: 10px;
+	text-align: left;
+	margin-left: 10px;
+}
+.introP{
+
+	font-size: 22px;
+	margin-top: 10px;
+	text-align: justify;
+	margin-left: 20px;
+	font-weight: normal;
+}
+
+
+.miss_Vision{
+	text-align: left;
+	margin-top: 10px;
+	
+}
+.MV_text{
+	margin-top: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	text-align: justify;
+	margin-left: 20px;
+}
+
+.veggies{
+	height: 100%;
+	width: 100%;
+	background-image: url('bghome.jpg');
+	background-position: center;
+	background-size: cover;
+	position: absolute;
+}
+
+.text_box{
+	width: 380px;
+	height: 480px;
+	position: relative;
+	margin: 1% auto;
+	background: linear-gradient(to right, #84ffff, transparent);
+	padding: 5px;
+	border-radius: 10%;
+	border:1px solid skyblue ;
+	overflow: hidden;
+
+}
+.button_box{
+	height: 40px;
+	width: 220px;
+	margin: 20px auto;
+	position: relative;
+	box-shadow: 0 0 20px 3px #40c4ff;
+	border-radius: 30px;
+
+
+}
+.btn_log-reg{
+	padding: 13px 30px ;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	outline: none;
+	position: relative;
+
+
+}
+
+
+
+#btn{
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 110px;
+	height: 100%;
+	background: linear-gradient(to right, #00b0ff, aqua);
+	border-radius: 30px;
+	transition: .5s;
+
+}
+.icons{
+	text-align: center;
+	margin: 30px auto;
+	height: 10px;
+}
+.icons img{
+	width: 40px;
+	margin: 0 12px;
+	box-shadow: 0 0 20px 2px #40c4ff;
+	cursor: pointer;
+	border-radius: 50%;
+
+}
+.input_board{
+	top: 150px;
+	position: absolute;
+	width: 280px;
+	transition: .5s;
+	color: black;
+	margin: 20px;
+}
+.input_box{
+	width: 100%;
+	padding: 15px 0;
+	margin: 5px 0;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 2px solid #455a64;
+	background: transparent;
+	outline: none;
+
+}
+.Submit_button{
+
+	width: 70%;
+	padding: 10px 20px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	margin-left: 35px;
+	background: linear-gradient(to right, #00b0ff, aqua);
+	border: none;
+	border-radius: 30px;
+}
+
+
+.tt{
+	font-size: 24px;
+	font-weight: bold;
+}
+
+
+.image{
+	margin-top: -380px;
+	margin-left: 1130px;
+}
+.image img{
+	height: 340px;
+	width: 450px;
+	border-radius: 30px;
+}
+
+
+.check{
+	margin: 30px 10px 30px 0;
+
+	background: #e1f5fe;
+}
+span{
+	color: black;
+	font-size: 15px;
+	bottom: 68px;
+	position: absolute;
+}
+#Login{
+	left: 50px;
+}
+#Register{
+	left: 450px;
+}
+
+.boxbg{
+	height: 150px;
+	width: 90%;
+margin-top: 40px;
+border: solid 1px white;
+background: linear-gradient(to right, white,skyblue);
+
+}
+
+.Historybg{
+
+	height: 150px;
+	width: 90%;
+	margin-top: 50px;
+	border: solid 1px white;
+	background: linear-gradient(to right, white,skyblue);
+}
+
+
+
+
+

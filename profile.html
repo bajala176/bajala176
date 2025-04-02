@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Smile-O-Meter Profile</title>
+    <link rel="stylesheet" type="text/css" href="homedesign.css">
+    <style>
+        /* Basic CSS for layout - you'll want to expand on this! */
+        body {
+            font-family: sans-serif;
+           
+            background-color: #f4f4f4; /* A light background */
+        }
+        .profile-container {
+            background-color: #fff;
+            padding-top: 100px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-top: 50px;
+            margin-left: 600px;
+            margin-bottom: -700px;
+            
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h3{
+            color: black;
+            font-size: 30px;
+        }
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            display: block;
+            border: 3px solid #ddd; /* A subtle border */
+        }
+        .profile-info label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .profile-info p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* A nice blue */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+       <header> 
+    <h1>
+        Welcome to Smile-O-Meter
+    </h1>
+    <h2>Happiness starts with a smile</h2>
+    <div class="button_LRSA">
+    <a href="web.html"><button type="button" class="btn_log-reg1" onclick="Home()">Home</button></a>
+    <a href="enhance.html"><button type="button" class="btn_log-reg1" onclick="Start()">Quiz</button></a>
+    <a href="history.html"><button type="button" class="btn_log-reg1" onclick="Login()">History</button></a>
+    <a href=""><button type="button" class="btn_log-reg1" onclick="Register()">Professionals</button></a>
+    <a href="profile.html"><button type="button" class="btn_log-reg1" onclick="Status()">Profile</button></a>
+    <a href="AboutUs.html"><button type="button" class="btn_log-reg1" onclick="AboutUs()">About Us</button></a>
+    </div>
+
+</header>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="person.jpg" alt="Profile Picture" class="profile-image">
+            <h3>Your Profile</h3>
+        </div>
+        <div class="profile-info">
+            <label for="name">Name:</label>
+            <p id="name">John Doe</p>
+
+            <label for="email">Email:</label>
+            <p id="email">john.doe@example.com</p>
+
+            <label for="happiness-score">Your Latest Happiness Score:</label>
+            <p id="happiness-score">85%</p>
+
+            <label for="last-quiz-date">Last Quiz Taken:</label>
+            <p id="last-quiz-date">March 30, 2025</p>
+
+            <label for="achievements">Your Achievements:</label>
+            <p id="achievements">Completed 5 happiness quizzes, Improved score by 10%.</p>
+
+            <a href="#" class="button">Edit Profile</a>
+            <a href="#" class="button">View Quiz History</a>
+        </div>
+    </div>
+
+<footer>
+    <p class="footer">&copy; 2025 Smile-O-Meter</p>
+    <p class="footer">Program develope by Bajala, Vincent B.</p>
+  </footer>
+</body>
+</html>

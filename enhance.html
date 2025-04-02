@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happiness Rating Web App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(to right, #00796b, #004d40);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            display: none;
+            margin-top: 30px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background: #fdfdfd;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h3 {
+            text-align: left;
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .question label {
+            margin-right: 15px;
+            font-weight: normal;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: #00796b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #004d40;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h2 {
+            color: #333;
+        }
+
+        .modal-content p {
+            margin: 15px 0;
+        }
+
+        .close-btn {
+            background: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background: #b71c1c;
+        }
+
+        canvas {
+            margin: 20px auto;
+            display: block;
+            width: 350px;
+            height: 350px;
+        }
+
+        .reminder {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Happiness Rating Web App</h1>
+    <p>Answer the questions below to measure your happiness score and receive advice!</p>
+</header>
+
+<div class="container">
+    <form id="happinessForm" onsubmit="event.preventDefault(); calculateResult();">
+        <h2>Happiness Questionnaire</h2>
+
+        <!-- Section 1 -->
+        <div id="section1" class="section active">
+            <h3>Instructions: Please answer all questions in this section.</h3>
+        </div>
+
+        <!-- Section 2 -->
+        <div id="section2" class="section">
+            <h3>Instructions: Please answer all questions in this section.</h3>
+        </div>
+
+        <!-- Section 3 -->
+        <div id="section3" class="section">
+            <h3>Instructions: Please answer all questions in this section.</h3>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" id="backButton" onclick="previousSection()" style="display: none;">Back</button>
+            <button type="button" id="nextButton" onclick="nextSection()">Next</button>
+            <button type="submit" id="submitButton" style="display: none;">Submit</button>
+        </div>
+    </form>
+    <div id="reminder" class="reminder"></div>
+</div>
+
+<!-- Modal for results -->
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <h2>Your Happiness Score</h2>
+        <p id="score"></p>
+        <p id="advice"></p>
+        <p id="quotes"></p>
+        <canvas id="happinessChart"></canvas> <!-- Bar Chart -->
+        <canvas id="happinessPieChart"></canvas> <!-- Pie Chart -->
+        <a href="web.html"><button class="close-btn" onclick="closeModal()">Close</button></a>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { english: "How satisfied are you with your life overall?", filipino: "Gaano ka nasisiyahan sa iyong buhay sa kabuuan?" },
+        { english: "Do you often feel positive or negative emotions?", filipino: "Madalas ka bang makaramdam ng positibo o negatibong emosyon?" },
+        { english: "How often do you feel stressed or anxious?", filipino: "Gaano kadalas ka nakakaranas ng stress o pagkabahala?" },
+        { english: "Do you have a sense of purpose in life?", filipino: "May layunin ka ba sa buhay?" },
+        { english: "How often do you experience happiness?", filipino: "Gaano kadalas ka nakakaranas ng kaligayahan?" },
+        { english: "Are you satisfied with your work/life balance?", filipino: "Nasisiyahan ka ba sa iyong balanse sa trabaho at buhay?" },
+        { english: "How often do you feel lonely?", filipino: "Gaano kadalas ka nakakaramdam ng kalungkutan?" },
+        { english: "Do you feel supported by the people around you?", filipino: "Nararamdaman mo ba ang suporta mula sa mga tao sa paligid mo?" },
+        { english: "How would you rate your physical health?", filipino: "Paano mo i-rere-rate ang iyong kalusugan?" },
+        { english: "Do you get enough rest/sleep?", filipino: "Nakakakuha ka ba ng sapat na pahinga/tulog?" },
+        { english: "How often do you engage in activities that make you happy?", filipino: "Gaano kadalas ka nakikilahok sa mga aktibidad na nagpapasaya sa iyo?" },
+        { english: "Do you feel optimistic about your future?", filipino: "Nararamdaman mo ba ang optimismo tungkol sa iyong hinaharap?" },
+        { english: "How satisfied are you with your relationships?", filipino: "Gaano ka nasisiyahan sa iyong mga relasyon?" },
+        { english: "Do you feel you have control over your life?", filipino: "Nararamdaman mo ba na ikaw ang may kontrol sa iyong buhay?" },
+        { english: "How much do you enjoy the small moments in life?", filipino: "Gaano mo kasaya ang mga maliliit na sandali sa buhay?" }
+    ];
+
+    const sections = [document.getElementById('section1'), document.getElementById('section2'), document.getElementById('section3')];
+    let currentSectionIndex = 0;
+
+    // Assign questions to sections
+    questions.forEach((question, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `  
+            <p>${index + 1}. ${question.english}</p>
+            <p><i>Translation: ${question.filipino}</i></p>
+            <label>1 <input type="radio" name="q${index}" value="1"></label>
+            <label>2 <input type="radio" name="q${index}" value="2"></label>
+            <label>3 <input type="radio" name="q${index}" value="3"></label>
+            <label>4 <input type="radio" name="q${index}" value="4"></label>
+            <label>5 <input type="radio" name="q${index}" value="5"></label>
+        `;
+        sections[Math.floor(index / 5)].appendChild(questionDiv);
+    });
+
+    function nextSection() {
+        if (currentSectionIndex < sections.length - 1) {
+            sections[currentSectionIndex].classList.remove('active');
+            currentSectionIndex++;
+            sections[currentSectionIndex].classList.add('active');
+            document.getElementById('backButton').style.display = 'inline-block';
+            if (currentSectionIndex === sections.length - 1) {
+                document.getElementById('nextButton').style.display = 'none';
+                document.getElementById('submitButton').style.display = 'inline-block';
+            }
+        }
+    }
+
+    function previousSection() {
+        if (currentSectionIndex > 0) {
+            sections[currentSectionIndex].classList.remove('active');
+            currentSectionIndex--;
+            sections[currentSectionIndex].classList.add('active');
+            document.getElementById('nextButton').style.display = 'inline-block';
+            document.getElementById('submitButton').style.display = 'none';
+            if (currentSectionIndex === 0) {
+                document.getElementById('backButton').style.display = 'none';
+            }
+        }
+    }
+
+    function calculateResult() {
+        const formData = new FormData(document.getElementById('happinessForm'));
+        let totalScore = 0;
+        let unanswered = false;
+
+        for (let i = 0; i < questions.length; i++) {
+            const value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value);
+            } else {
+                unanswered = true;
+            }
+        }
+
+        if (unanswered) {
+            document.getElementById('reminder').innerText = 'Please answer all questions before submitting!';
+        } else {
+            document.getElementById('reminder').innerText = '';
+            showModal(totalScore);
+        }
+    }
+
+    function showModal(score) {
+        const advice = getAdvice(score);
+        const quotes = getQuotes(score);
+
+        document.getElementById('score').innerText = `Your happiness score is: ${score}`;
+        document.getElementById('advice').innerText = `Advice: ${advice}`;
+        document.getElementById('quotes').innerText = `Quote: ${quotes}`;
+        document.getElementById('resultModal').style.display = 'block';
+
+        // Render chart
+        renderCharts();
+    }
+
+    function getAdvice(score) {
+        if (score <= 25) {
+            return 'Your happiness level seems to be low. It is important to engage in more self-care activities and focus on cultivating positive emotions. For additional support, consider seeking professional guidance or talking to the nearest guidance office.';
+        } else if (score <= 50) {
+            return 'You seem to be in a balanced state of mind. Keep nurturing your relationships and personal growth. For further self-development, consider talking to your family, parents, and trustworthy friends to gain valuable perspectives and support.';
+        } else {
+            return 'You are very happy! Keep up the positive attitude and continue focusing on your well-being. To maintain this happiness, try to make more friends and build meaningful connections.';
+        }
+    }
+
+    function getQuotes(score) {
+        if (score <= 25) {
+            return '“Even the darkest night will end and the sun will rise.” – Victor Hugo';
+        } else if (score <= 50) {
+            return '“The best way to predict the future is to create it.” – Abraham Lincoln';
+        } else {
+            return '“Happiness depends upon ourselves.” – Aristotle';
+        }
+    }
+
+    function renderCharts() {
+        const ctxBar = document.getElementById('happinessChart').getContext('2d');
+        const ctxPie = document.getElementById('happinessPieChart').getContext('2d');
+
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Overall Happiness'],
+                datasets: [{
+                    label: 'Happiness Score',
+                    data: [65],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            }
+        });
+
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Positive', 'Neutral', 'Negative'],
+                datasets: [{
+                    data: [60, 30, 10],
+                    backgroundColor: ['#4caf50', '#ffeb3b', '#f44336']
+                }]
+            }
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('resultModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

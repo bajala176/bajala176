@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Smile-O-meter</title>
+	<link rel="stylesheet" type="text/css" href="styledesign.css">
+</head>
+<body>
+
+	<div class="veggies">
+		<header> 
+	<h1>
+		Welcome to Smile-O-Meter
+	</h1>
+	<h2>Happiness starts with a smile</h2>
+
+</header>
+
+
+		<div class="text_box">
+
+				<h3 class="log">Login</h3>
+
+				
+				<div class="icons">
+					<img src="fb.png" >
+					<img src="tw.png">
+					<img src="ig.png">
+				</div>
+
+				<form id="log-form" class="input_board">
+					<label>Username:</label>
+					<input type="text" class="input_box" placeholder="Username" required id="username">
+					<label>Password:</label>
+					<input type="password" class="input_box" placeholder="password" required id="password">
+
+					
+
+					<button type="submit" class="Submit_button" id="btnLogin">Log in</button>
+					<br>
+					<p id="lockout-message" class="error-message" style="display: none;">Your wrong!. Please wait 10 second and Try again.</p>
+				</form>
+				
+		</div>
+		
+	</div>
+
+	<script >
+		
+		
+   		let attempCount =0;
+   		let lockoutTimer;
+   		document.getElementById('log-form').addEventListener('submit', function(event){
+   			event.preventDefault();
+
+   			const username= document.getElementById('username').value;
+   			const password= document.getElementById('password').value;
+
+   			const correctUserName= 'admin123';
+   			const correctPassword= 'admin123';
+
+   			if(attempCount>=1){
+   				 document.getElementById('btnLogin').disabled = true;
+   				 document.getElementById('lockout-message').style.display ='block';
+
+   				 lockoutTimer= setTimeout(()=>{
+   				 	attempCount=0;
+   				 	document.getElementById('btnLogin').disabled = false;
+					document.getElementById('lockout-message').style.display ='none';
+   				 },10000);
+   				 return;
+
+   			}
+   			if (username===correctUserName&&password===correctPassword){
+   				alert('Login succesful! click to continue');
+
+   				window.location.href = 'web.html';
+   			}else{
+   				attempCount++;
+   				document.getElementById('login-error').style.display= 'block';
+   			}
+   		});
+	</script>
+
+</body>
+</html>
